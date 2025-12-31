@@ -1,5 +1,5 @@
 use crate::services::{MusicOpenError, MusicService};
-// use crate::utils::{self, texture_util};
+
 use eframe::egui::{self, Response, TextureHandle, Ui};
 
 pub struct MusicPathEntryUI {
@@ -10,7 +10,7 @@ pub struct MusicPathEntryUI {
 impl MusicPathEntryUI {
     pub fn new() -> Self {
         Self {
-            path: String::new(),
+            path: String::from("music/audio.mp3"),
             submit_response: None,
         }
     }
@@ -32,11 +32,11 @@ impl MusicPathEntryUI {
         if let Some(response) = &self.submit_response {
             if response.clicked() {
                 match service.open(self.path.as_str()) {
-                    MusicOpenError::OpenErr => println!("Music open error!"),
-                    MusicOpenError::DecoderErr => println!("Music decoding error!"),
-                    MusicOpenError::SinkErr => println!("Music sink error!"),
-                    MusicOpenError::None => {} // if let Ok(image) = service.decode_image() {
-                                               //     return Some(TextureUtil::load_cover_texture(ctx, image))
+                    Ok(_) => println!("Music opened successfully!"),
+                    Err(MusicOpenError::OpenErr) => println!("Music open error!"),
+                    Err(MusicOpenError::DecoderErr) => println!("Music decoding error!"),
+                    Err(MusicOpenError::SinkErr) => println!("Music sink error!"),
+                    _ => {}
                 }
             }
         }

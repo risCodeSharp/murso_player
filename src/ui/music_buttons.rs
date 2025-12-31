@@ -32,7 +32,7 @@ impl MusicButtons {
             let how_hovered = ui
                 .ctx()
                 .animate_bool_with_time(response.id, response.hovered(), 0.1);
-            self.handle_button_background(ui, &response, painter, &rect, how_hovered);
+            self.handle_button_background(&response, painter, &rect, how_hovered);
 
             // --- Play Icon (Triangle) ---
             let play_icon_points = Self::calculate_play_icon_points(painter, &rect);
@@ -61,7 +61,7 @@ impl MusicButtons {
             let how_hovered = ui
                 .ctx()
                 .animate_bool_with_time(response.id, response.hovered(), 0.1);
-            self.handle_button_background(ui, &response, painter, &rect, how_hovered);
+            self.handle_button_background( &response, painter, &rect, how_hovered);
 
             // --- Pause Icon (Two Bars) ---
             let (left_bar, right_bar) = Self::calculate_pause_bar_rects(&painter, &rect);
@@ -87,7 +87,7 @@ impl MusicButtons {
             let how_hovered = ui
                 .ctx()
                 .animate_bool_with_time(response.id, response.hovered(), 0.1);
-            self.handle_button_background(ui, &response, painter, &rect, how_hovered);
+            self.handle_button_background( &response, painter, &rect, how_hovered);
 
             // --- Stop Icon (Square) ---
             let icon_rect = Self::calculate_stop_icon_rect(painter, &rect);
@@ -103,7 +103,6 @@ impl MusicButtons {
 
     fn handle_button_background(
         &self,
-        ui: &egui::Ui,
         response: &Response,
         painter: &Painter,
         rect: &Rect,
