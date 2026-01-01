@@ -1,9 +1,8 @@
-use eframe::egui::ahash::random_state;
 use image::{DynamicImage, ImageReader};
-use rodio::{Decoder, OutputStream, Sink, Source};
+use rodio::{OutputStream, Sink, Source};
 use std::{
     io::Cursor,
-    time::{Duration, Instant},
+    time::Duration,
 };
 
 use crate::models::track::Track;
@@ -35,10 +34,12 @@ impl MusicService {
         }
     }
 
-    pub fn open(&mut self, file_path: &str) -> Result<(), MusicOpenError> {
-        self.music_file = Track::new(file_path).map_err(|_| MusicOpenError::OpenErr)?;
-
-        let file = std::fs::File::open(file_path).map_err(|_| MusicOpenError::OpenErr)?;
+    pub fn open(&mut self, file_path: impl AsRef<std::path::Path>) -> Result<(), MusicOpenError> {
+        
+        let path = file_path.as_ref();
+        self.music_file = Track::new(path).map_err(|_| MusicOpenError::OpenErr)?;
+        
+        let file = std::fs::File::open(path).map_err(|_| MusicOpenError::OpenErr)?;
 
         let source = rodio::Decoder::try_from(file).map_err(|_| MusicOpenError::DecoderErr)?;
 
