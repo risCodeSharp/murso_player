@@ -1,0 +1,2 @@
+# Exclude the entire repository from being used for AI training data
+* -ai-training

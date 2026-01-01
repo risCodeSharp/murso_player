@@ -1,11 +1,8 @@
 use std::{fs, path::PathBuf};
 
-use crate::{
-    services::{MusicOpenError, MusicService},
-    ui::music_list,
-};
+use crate::services::MusicService;
 
-use eframe::egui::{self, ComboBox, Response, TextureHandle, Ui};
+use eframe::egui::{self, Response, TextureHandle};
 
 pub struct MusicPathEntryUI {
     path: String,
@@ -18,7 +15,7 @@ pub struct MusicPathEntryUI {
 impl MusicPathEntryUI {
     pub fn new() -> Self {
         Self {
-            path: String::from("music/audio.mp3"),
+            path: String::from("music"),
             directory_search_reponse: None,
             request_load_music: false,
             music_list: Vec::new(),

@@ -3,6 +3,8 @@
     windows_subsystem = "windows"
 )] // hide console window on windows in release
 
+// License: AiPL - AI Training Prohibited
+
 use eframe::{self, egui};
 
 pub mod app;
